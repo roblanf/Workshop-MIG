@@ -1,0 +1,204 @@
+---
+title: "Setting up for the MIG workshop"
+author: "Rob Lanfear"
+date: "`r Sys.Date()`"
+output: 
+    bookdown::html_document2: 
+      css: ../../style.css
+      toc: yes
+      toc_depth: 4
+      theme: cosmo
+      number_sections: no
+      toc_float: yes
+      highlight: pygments
+      fig_width: 4 
+      fig_height: 3
+editor_options: 
+  chunk_output_type: console
+---
+
+This document outlines the software you need to install in preparation for the MIG phylogenetics workshop. You'll install a few pieces of software, and it shouldn't take more than 30 minutes (perhaps a little longer if you have a Windows machine, and haven't installed Linux on it yet). Please make sure to complete this before the start of the workshop.
+
+By the end of this document, you’ll be able to run IQ-TREE and MAFFT from the command line, and view/edit results in FigTree, Geneious, and Sublime Text.
+
+> Note: if you get stuck during any of these instructions, ChatGPT can be incredibly helpful if you describe the problem in detail - feel free to upload this HTML to ChatGPT so it knows what you are trying to do when you describe your problem!
+
+# Software to install
+
+## Windows users only: **Linux**
+
+Most bioinformatics software works seamlessly in Linux, but can be frustrating or impossible to use on Windows. Luckily, Windows allows you to install Linux.
+
+If you use Windows, you will need to install Linux by following these instructions:
+
+<https://learn.microsoft.com/en-us/windows/wsl/setup/environment>
+
+You will need to follow up to and including the section "Update and upgrade packages".
+
+Once you are done, you can see if it worked by going to the Start Menu, typing "Ubuntu" and opening that application. You should see a terminal window.
+
+Note: In the Ubuntu shell on Windows, file paths are Linux file paths, and your C drive is at `/mnt/c/`. So for example, the path to your Downloads folder should be `/mnt/c/Users/<YourUsername>/Downloads`, e.g. for me it would be `/mnt/c/Users/Rob/Downloads`. To change directories in linux, you use the `cd` command, and the `ls` command lists what's in a directory. So you should be able to see what's in your downloads folder by using these lines in your Ubuntu shell (adding your username where it's required!):
+
+```{bash, eval=FALSE}
+cd /mnt/c/Users/<YourUsername>/Downloads
+ls
+```
+
+If you can do this, you're up and running!
+
+If you use Windows, then once WSL is installed everything we do at the command line in this workshop will be done inside the Ubuntu shell, which is accessed from the Start Menu.
+
+## 1. **Geneious**
+
+Geneious is software that is useful for looking at alignments. The free version is fine. You do not need to pay for a license. We will only use features available in the free version in this workshop.
+
+Download Geneious here: <https://www.geneious.com/updates>
+
+Please check that you can run it after you have installed it.
+
+## 2. **FigTree**
+
+FigTree is a lightweight tree viewer. If you already have a favourite phylogenetic tree viewer, you can skip this step.
+
+Otherwise, please download FigTree from the [GitHub repo](https://github.com/rambaut/figtree/releases/tag/v1.4.4):
+
+-   For *Windows*, download the zip file [here](https://github.com/rambaut/figtree/releases/download/v1.4.4/FigTree.v1.4.4.zip)
+
+-   For *Mac*, download the dmg file [here](https://github.com/rambaut/figtree/releases/download/v1.4.4/FigTree.v1.4.4.dmg)
+
+Unzip the zip file (Windows) or open the disk image (Mac), then put the FigTree executable where you keep your programs, and then make sure you can use it to open the two example tree files that come with the download, `carnivore.tree` and `influenza.tree`.
+
+## 3. **Sublime Text**
+
+Sublime Text is a plain text editor. If you already have a favourite plain text editor (note, not MS Word!), then you can skip this step.
+
+Otherwise, please download Sublime Text from [here](https://www.sublimetext.com/download), then check that it works by running it and making sure you can edit and save a text document.
+
+A good plain text editor is really important for bioinformatics.
+
+## 4. **Miniconda**
+
+Miniconda is a package manager. The workshop will use Miniconda as a way of installing and managing software. Miniconda (and its relative Anaconda, which is the same thing but comes with more prepackaged software) are widely used package managers in bioinformatics. They allow you to create 'environments', which are isolated areas on your computer in which you can install and run software. They allow you to very easily install and run pretty much every piece of widely-used bioinformatics software. When you get used to them they are incredibly helpful, and remove most of the headaches associated with dealing with bioinformatics software.
+
+### Installation
+
+If you already have Miniconda or Anaconda installed (using Linux if you're on Windows) and are comfortable using them, you can skip the installation and move to 'Adding channels to conda', below.
+
+To install Miniconda:
+
+-   For *Windows*, open your Ubuntu shell and use it to follow the [instructions for installing Miniconda using the Linux Terminal Installer](https://www.anaconda.com/docs/getting-started/miniconda/install#linux-terminal-installer)
+
+-   For *Mac*, follow either the [macOS graphical installer or macOS terminal installer instructions](https://www.anaconda.com/docs/getting-started/miniconda/install#macos-linux-installation)
+
+Those instructions are all under the 'Basic install instructions' header here: <https://www.anaconda.com/docs/getting-started/miniconda/install>
+
+Once you have Miniconda installed, make sure to test your install as described in the final step of the instructions.
+
+### Adding channels
+
+Conda is accessed from the Linux command line. How you get to the command line depends on your operating system:
+
+-   On **Windows**: open "Ubuntu" from the Windows Start Menu
+-   On **Mac/Linux**: open the "Terminal" application
+
+Before we install anything with conda, we need to tell it where to look for the software we'll need. You only need to do this once when you are setting up conda.
+
+Copy and paste the following lines into your command line:
+
+``` bash
+conda config --add channels conda-forge
+conda config --add channels bioconda
+```
+
+These two channels are where about 99% of bioinforamtics software is made availble.
+
+### Setting up an environment
+
+Next we'll set up a conda environment for the workshop, and install the two pieces of software we need. An environment is a place that you can install software. You can use different environments for different pieces of software when the software has different requirements. Environments are also reproducible. Once you have an environment set up, you can set up exactly the same environment on other machines, making your analysis easy to reproduce elsewhere. If you're interested, you can read a lot more about conda environments [here](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html).
+
+To set up your conda environment type this at the command line (you can copy/paste it) and hit Return. When prompted, answer the question it asks you by typing 'y' and hitting Return. 
+
+```{bash, eval=FALSE}
+conda create -n phylo
+```
+
+At this point, you have created your new environment called 'phylo'. Let's check it worked. Type this at your command line:
+
+```{bash, eval=FALSE}
+conda env list
+```
+
+You should see your new 'phylo' environment listed.
+
+## 5. **IQ-TREE** and **MAFFT**
+
+Now your environment exists, we'll use it to install the software we need for the workshop.
+
+First we need to activate our conda environment. At your command line, type this and hit Return:
+
+```{bash, eval=FALSE}
+conda activate phylo
+```
+
+When you do this, you should see that the bit at the start of your command line has changed from `(base)` to `(phylo)`, something like this:
+
+```         
+(base) aquila:tutorial roblanfear$ conda activate phylo
+(phylo) aquila:tutorial roblanfear$ 
+```
+
+The first part of your command line tells you which environment you're in.
+
+You are now working inside the 'phylo' environment. You can get out of that environment at any time using the command `conda deactivate` but don't do that now.
+
+Finally we'll install the software we need: IQ-TREE (for building trees) and MAFFT (for aligning sequences). Copy/paste the commands below, and type 'y' and hit Return when prompted:
+
+```{bash, eval=FALSE}
+conda install iqtree
+conda install mafft
+```
+
+You can now check that those installations work by typing `iqtree -h` and `mafft -h` at the command line (hitting Return after each). In each case, you should see some basic instructions. 
+
+> The convention for command line software is that if you type the name and `-h` you get a simple help file. 
+
+Most software has far more useful information in online documentation. E.g.:
+
+-   IQ-TREE has its documentation here: <https://iqtree.github.io/doc/>
+-   MAFFT has its documentation here: <https://mafft.cbrc.jp/alignment/software/>
+
+If at any point you want to know what software you have installed in your environment, you can type:
+
+```{bash, eval=FALSE}
+conda list
+```
+
+When you do that, you should see something like this:
+
+``` {eval="FALSE"}
+(phylo) aquila:tutorial roblanfear$ conda list
+# packages in environment at /Users/roblanfear/opt/anaconda3/envs/phylo:
+#
+# Name                    Version                   Build  Channel
+gawk                      5.3.1                h0631170_0    conda-forge
+gmp                       6.3.0                hf036a51_2    conda-forge
+iqtree                    3.0.1                h6ed3961_0    bioconda
+libasprintf               0.25.1               h3184127_1    conda-forge
+libcxx                    21.1.1               h3d58e20_0    conda-forge
+libgettextpo              0.25.1               h3184127_1    conda-forge
+libiconv                  1.18                 h57a12c2_2    conda-forge
+libintl                   0.25.1               h3184127_1    conda-forge
+llvm-openmp               21.1.0               hf4e0ed4_0    conda-forge
+mafft                     7.526                hfdf4475_0    conda-forge
+mpfr                      4.2.1                haed47dc_3    conda-forge
+ncurses                   6.5                  h0622a9a_3    conda-forge
+readline                  8.2                  h7cca4af_2    conda-forge
+```
+
+There's a lot more than just `iqtree` and `mafft`, because conda installed all the *other* stuff that these pieces of software require to work.
+
+> As a general rule, if you want to install bioinformatics software, just google the name of the software and 'bioconda'. You'll usually find clear installation instructions. For example, the iqtree instructions are here: <https://anaconda.org/bioconda/iqtree>. ChatGPT is also incredibly useful if you get stuck!
+
+# That's it!
+
+Once you have `iqtree`, `mafft`, FigTree, Geneious, and Sublime Text installed, and you can run them all successfully, you're ready for the workshop.
