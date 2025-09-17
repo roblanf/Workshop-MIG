@@ -25,6 +25,8 @@ By the end of this document, you’ll be able to run IQ-TREE and MAFFT from the 
 
 # Software to install
 
+If you have a Mac or Linux, everything should work ``straight out of the box''. These operating systems are command-line based, so you can run everything from the command line.
+
 ## Windows users only: **Linux**
 
 Most bioinformatics software works seamlessly in Linux, but can be frustrating or impossible to use on Windows. Luckily, Windows allows you to install Linux.
@@ -37,7 +39,7 @@ You will need to follow up to and including the section "Update and upgrade pack
 
 Once you are done, you can see if it worked by going to the Start Menu, typing "Ubuntu" and opening that application. You should see a terminal window.
 
-Note: In the Ubuntu shell on Windows, file paths are Linux file paths, and your C drive is at `/mnt/c/`. So for example, the path to your Downloads folder should be `/mnt/c/Users/<YourUsername>/Downloads`, e.g. for me it would be `/mnt/c/Users/Rob/Downloads`. To change directories in linux, you use the `cd` command, and the `ls` command lists what's in a directory. So you should be able to see what's in your downloads folder by using these lines in your Ubuntu shell (adding your username where it's required!):
+Note: In the Ubuntu shell on Windows, file paths are Linux file paths, and your C drive is at `/mnt/c/`. So for example, the path to your Downloads folder should be `/mnt/c/Users/<YourUsername>/Downloads`, e.g. for me it would be `/mnt/c/Users/Rob/Downloads`. To change directories in Linux, you use the `cd` command, and the `ls` command lists what's in a directory. So you should be able to see what's in your downloads folder by using these lines in your Ubuntu shell (adding your username where it's required!):
 
 ```{bash, eval=FALSE}
 cd /mnt/c/Users/<YourUsername>/Downloads
@@ -46,11 +48,11 @@ ls
 
 If you can do this, you're up and running!
 
-If you use Windows, then once WSL is installed everything we do at the command line in this workshop will be done inside the Ubuntu shell, which is accessed from the Start Menu.
+Once Ubuntu is installed, everything we do at the command line in this workshop will be done inside the Ubuntu shell, which is accessed from the Start Menu.
 
 ## 1. **Geneious**
 
-Geneious is software that is useful for looking at alignments. The free version is fine. You do not need to pay for a license. We will only use features available in the free version in this workshop.
+Geneious is software that is useful for looking at alignments. The free version is fine (you do not need to sign up for a free trial). You do not need to pay for a license. We will only use features available in the free version in this workshop.
 
 Download Geneious here: <https://www.geneious.com/updates>
 
@@ -110,7 +112,7 @@ conda config --add channels conda-forge
 conda config --add channels bioconda
 ```
 
-These two channels are where about 99% of bioinforamtics software is made availble.
+These two channels are where about 99% of bioinformatics software is made availble.
 
 ### Setting up an environment
 

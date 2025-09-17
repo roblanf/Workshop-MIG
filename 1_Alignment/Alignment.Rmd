@@ -22,7 +22,7 @@ editor_options:
 Remember that the point of alignment is to arrange homologous sequences in such a way that you are willing to accept that each *column*:
 
 -   represents a site that was present in the ancestor of all the sampled taxa
--   was inherited vertically to all of the sequences in your alignment, perhaps with modification (i.e. substitutions)
+-   was inherited vertically to all of the sequences in your alignment, perhaps with modification (i.e. substitutions).
 
 In practice alignment is very hard, and there's rarely a 'right' answer for empirical data. Widely accepted practice is:
 
@@ -37,7 +37,7 @@ In my opinion, by far the most important thing is that you check ***by eye*** ev
 
 First, make a new directory wherever you like to keep stuff on your computer, and call it "Workshop". Inside that directory, make another directory called "Alignment".
 
-Now use your command line (terminal on Mac, Ubuntu on Windows) to navigate to that directory using the `cd` command.
+Now use your command line (terminal on Mac/Linux, Ubuntu on Windows) to navigate to that directory using the `cd` command.
 
 An example on a Mac might look a bit like this:
 
@@ -63,13 +63,13 @@ Next, download the raw data for this workshop. To do that:
 
 # **Look at the unaligned sequences**
 
-The file `turtle_ENSGALG00000005902.unaligned.fasta` contains sequences from the genomes of a range of vertebrates. The bioinformatic pipeline used to get these sequences was satisfied that they were all homologuos to each other - i.e. the are all copies of a sequence that existed in the ancestor of these species, and was inherited vertically (with modification) into the species we've included in our analysis.
+The file `turtle_ENSGALG00000005902.unaligned.fasta` contains sequences from the genomes of a range of vertebrates. The bioinformatic pipeline used to get these sequences was satisfied that they were all homologous to each other --- i.e. they are all copies of a sequence that existed in the ancestor of these species, and was inherited vertically (with modification) into the species we've included in our analysis.
 
 Open the file in Sublime Text, and try dragging and dropping it into Geneious too. Both can be useful ways to look at the initial sequences.
 
 What do you notice about the unaligned sequences? Do some of them look similar? Do any look different? Are they similar lengths?
 
-**Tip**: You can open an entire folder with Sublime Text. Try dragging and dropping the whole Workshop folder into Sublime. This allows you to easily navigate through the folder as things change. You can also keep multiple tabs open - just double click a file in the drop down menu to the side and it will stay open.
+**Tip**: You can open an entire folder with Sublime Text. Try dragging and dropping the whole Workshop folder into Sublime. This allows you to easily navigate through the folder as things change. You can also keep multiple tabs open --- just double click a file in the drop down menu to the side and it will stay open.
 
 # **Alignment using MAFFT**
 
@@ -90,7 +90,7 @@ ls
 ```
 
 
-**Tip**: Unix has tab completion, which is really useful if you're typing commands. Tab completion will try to complete a command for you if you hit tab. If it's ambiguous, it will show you the options. Type the start of any command or file name (e.g. `turt` is the start of the long filename in the command below) than press TAB - Unix will complete the filename for you because it's the only thing that starts with `turt`. 
+**Tip**: Unix has tab completion, which is really useful if you're typing commands. Tab completion will try to complete a command for you if you hit tab. If it's ambiguous, it will show you the options. Type the start of any command or file name (e.g. `turt` is the start of the long filename in the command below) then press tab --- Unix will complete the filename for you because it's the only thing that starts with `turt`. 
 
 Align the sequences with MAFFT like this:
 
@@ -98,11 +98,11 @@ Align the sequences with MAFFT like this:
 mafft turtle_ENSGALG00000005902.unaligned.fasta > aligned_seqs.fasta
 ```
 
-This will create a new file called `aligned_seqs.fasta`, in this file, MAFFT has aligned the sequences to one another as best it can.
+This will create a new file called `aligned_seqs.fasta`. In this file, MAFFT has aligned the sequences to one another as best it can.
 
 Let's break this command down:
 
-* `mafft`: just calls mafft, which expects the next command to be the input sequence file
+* `mafft`: just calls MAFFT, which expects the next command to be the input sequence file
 * `>`: is a 'pipe'. By default, a lot of Unix programs (including MAFFT) send their output to the screen. The `>` sends to to where you tell it, which in this case is to a new file called `aligned_seqs.fasta`. If you run the command without the pipe, i.e. `mafft turtle_ENSGALG00000005902.unaligned.fasta` you'll see the output just appears on screen, and is not saved anywhere.
 
 # **Checking the alignment**
@@ -132,7 +132,7 @@ Let's remove the bad sequence and try again.
 2.  Open the `turtle_ENSGALG00000005902.unaligned.cleaned.fasta` file in Sublime text
 3.  Delete the name and sequence (the name is on a line starting with `>`, the sequence follows) of the offending sequence, then save the file
 
-Notice that it's common in bioinformatics to have long file names, which describe what has been done to a file
+Notice that it's common in bioinformatics to have long file names, which describe what has been done to a file.
 
 ## Realign the cleaned sequence file
 
@@ -152,7 +152,7 @@ Finally, build a tree from the alignment using Geneious. If the tree and the ali
 
 Although the way that Geneious builds trees uses a very simple clustering method called Neighbour Joining, these trees are still useful and can be reliable.
 
-The gene you've aligned comes from a dataset designed to figure out where turtles sit in the tree of life. The three widely accepted options (at least, about decade ago) were that turtles were one of:
+The gene you've aligned comes from a dataset designed to figure out where turtles sit in the tree of life. The three widely accepted options (at least, about a decade ago) were that turtles were one of:
 
 1.  The sister group to birds
 
@@ -164,7 +164,7 @@ The gene you've aligned comes from a dataset designed to figure out where turtle
 
 What does your single-gene phylogeny say? If it differs from these, why could that be?
 
-Do you notice anything else? Where does the Lizard group? Is this what you'd expect? 
+Do you notice anything else? Where does the Lizard group sit? Is this what you'd expect? 
 
 # **Going further**
 

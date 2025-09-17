@@ -25,9 +25,9 @@ In this practical we'll run IQ-TREE to estimate Maximum Likelihood trees of our 
 
 Inside the `Workshop` folder on your computer, make a new folder called `IQTREE_basics`.
 
-> Tip: note that we never have spaces in file or folder names. This is intentional - spaces can be problematic in Unix.
+> Tip: note that we never have spaces in file or folder names. This is intentional --- spaces can be problematic in Unix.
 
-Now use your command line (terminal on Mac, Ubuntu on Windows) to navigate to that directory using the `cd` command.
+Now use your command line (terminal on Mac/Linux, Ubuntu on Windows) to navigate to that directory using the `cd` command.
 
 An example on a Mac might look a bit like this:
 
@@ -35,7 +35,7 @@ An example on a Mac might look a bit like this:
 cd /Users/rob/Documents/Workshop/IQTREE_basics 
 ```
 
-and on Windows it might look like this
+and on Windows it might look like this:
 
 ```{bash, eval=FALSE}
 cd /mnt/c/Users/rob/Documents/Workshop/IQTREE_basics
@@ -73,7 +73,7 @@ You should see something like this:
 
 Now we'll use IQ-TREE to estimate a tree from our alignment. IQ-TREE is built so that (as far as possible) the default settings should do sensible and useful things.
 
-First we'll estimate a tree of the single locus we aligned before. To do this, Now we can run IQ-TREE on that alignment as follows, using the simplest possible command line:
+First we'll estimate a tree of the single locus we aligned before. To do this, we can run IQ-TREE on that alignment as follows, using the simplest possible command line:
 
 ```{bash, eval=FALSE}
 iqtree -s aligned_seqs_cleaned.fasta
@@ -97,9 +97,9 @@ Analysis results written to:
 
 The two most important files are the `.iqtree` file and the `.treefile` file.
 
-Open up the `.iqtree` file and scan through it. You should see that IQ-TREE has chosen the `TNe+G4` model of evolution. We'll cover models of evolution after lunch, but for now it's enough to say that this is a relatively simple model of evolution.
+Open up the `.iqtree` file and scan through it. You should see that IQ-TREE has chosen the `TNe+G4` model of evolution. This is the Tamura-Nei model of evolution with a 4-category discrete gamma rate variation, which is a relatively simple model of evolution.
 
-As you continue to scan through the file, you'll see the Maximum Likelihood model parameters printed, and then some information about the tree and a schematic of the tree which looks like this:
+As you continue to scan through the file, you'll see the Maximum Likelihood model parameters printed, and then some information about the tree and a schematic of the tree, which looks like this:
 
 ```         
 NOTE: Tree is UNROOTED although outgroup taxon 'Bird-chicken' is drawn at root
@@ -144,7 +144,7 @@ iqtree -s aligned_seqs_cleaned.fasta -b 100 -redo
 Breaking down the command line:
 
 * `-b 100` tells IQ-TREE to do 100 bootstraps
-* `-redo
+* `-redo` make it perform both model selection and tree finding every time
 
 What IQ-TREE does here is:
 
@@ -186,19 +186,19 @@ When it's done, if you open up the `.iqtree` file, it should look pretty similar
 
 ## Interpreting bootstraps
 
-Bootstrap percentages below \~70 mean we really can't be sure of a grouping. Above \~95% is considered to be quite certain. Be careful though - a high bootstrap (even 100%) doesn't mean a branch is true! It just means that it has low sampling variance from the alignment we gave. (More on this tomorrow!).
+Bootstrap percentages below \~70 mean we really can't be sure of a grouping. Above \~95% is considered to be quite certain. Be careful though --- a high bootstrap (even 100%) doesn't mean a branch is true! It just means that it has low sampling variance from the alignment we gave. 
 
 Note that with large datasets, bootstrap values are almost always 100%, whether or not the branch is right or wrong. There is a nice paper on that written by Sudhir Kumar and coauthors in 2012, called "Statistics and Truth in Phylogenomics" here:
 
 https://doi.org/10.1093/molbev/msr202
 
-# **Figtree**
+# **FigTree**
 
 Looking at trees in plain text is useful, but annoying. Tree viewers are much more useful, and FigTree is a good lightweight tree viewer.
 
 Use FigTree to open the `aligned_seqs_cleaned.fasta.treefile` file that you just made. To do this, open FigTree, then from the `File` menu choose `Open` and navigate to the `aligned_seqs_cleaned.fasta.treefile` file.
 
-FigTree will ask about naming the node labels - you can ignore this and click `OK`.
+FigTree will ask about naming the node labels --- you can ignore this and click `OK`.
 
 You should now see something like this:\
 \
@@ -206,12 +206,12 @@ You should now see something like this:\
 
 ## Rooting and adding branch labels
 
-This tree is misleading - it shows the birds at the root. Our outgroup in this study is in fact the Lungfish. We also want to put the bootstrap values on the branches. Let's do both, and arrange our tree to look sensible too.
+This tree is misleading --- it shows the birds at the root. Our outgroup in this study is in fact the Lungfish. We also want to put the bootstrap values on the branches. Let's do both, and arrange our tree to look sensible too.
 
 1.  Click on the branch leading to the Lungfish, then at the top click on the `Reroot` button with the big yellow arrow
 2.  Open the `Trees` menu on the left, and tick the `Order nodes` box.
 3.  Open the `Branch Labels` menu on the left
-    -   tick the box next to 'Branch Labels\`
+    -   tick the box next to \`Branch Labels'
     -   in the `Display` drop-down menus, click `label`
 
 At the end of this, your tree should look like this. I've annotated the figure to point out what's what. Note that the branch lengths are in units of substitutions per site. 

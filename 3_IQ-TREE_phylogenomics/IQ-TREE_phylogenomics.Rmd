@@ -19,21 +19,21 @@ editor_options:
 
 # **Introduction**
 
-In many cases, researchers are interested in estimtaing trees of hundreds or thousands of loci at a time. This allows for much more robust estimates of things like species trees. It also allows us to examine the variation among the single locus trees, which can tell us a lot about things like ancestral population sizes, recombination, hybridisation, and introgression.
+In many cases, researchers are interested in estimating trees of hundreds or thousands of loci at a time. This allows for much more robust estimates of things like species trees. It also allows us to examine the variation among the single locus trees, which can tell us a lot about things like ancestral population sizes, recombination, hybridisation, and introgression.
 
-Analysing huge datasets is a bit beyond the scope of this practical, and would usually require either a lot of time or a lot of compute (or both). In this practical we'll replicate the basic idea by using IQ-TREE to analyse dataset of 29 genes.
+Analysing huge datasets is a bit beyond the scope of this practical, and would usually require either a lot of time or a lot of compute (or both). In this practical we'll replicate the basic idea by using IQ-TREE to analyse a dataset of 29 genes.
 
 As with the rest of the workshop, these 29 genes were put together to try and figure out the closest relatives of turtles. There are three placements of turtles that people have tended to recover in their phylogenetic analyses:
 
 ![](images/turtle.png)
 
-The paper from which we have taken the 29 loci used in this study is by Chiari et al, and was published in 2012 (<https://doi.org/10.1186/1741-7007-10-65>). Our 29 loci is roughly 10% of their original 248 gene dataset, but it's sufficient to replicate their results.
+The paper from which we have taken the 29 loci used in this study is by Chiari et al., and was published in 2012 (<https://doi.org/10.1186/1741-7007-10-65>). Our 29 loci is roughly 10% of their original 248-gene dataset, but it's sufficient to replicate their results.
 
 # **Getting set up**
 
 Inside the `Workshop` folder on your computer, make a new folder called `IQTREE_phylogenomics`.
 
-Now use your command line (terminal on Mac, Ubuntu on Windows) to navigate to that directory using the `cd` command.
+Now use your command line (terminal on Mac/Linux, Ubuntu on Windows) to navigate to that directory using the `cd` command.
 
 An example on a Mac might look a bit like this:
 
@@ -41,7 +41,7 @@ An example on a Mac might look a bit like this:
 cd /Users/rob/Documents/Workshop/IQTREE_phylogenomics 
 ```
 
-and on Windows it might look like this
+and on Windows it might look like this:
 
 ```{bash, eval=FALSE}
 cd /mnt/c/Users/rob/Documents/Workshop/IQTREE_phylogenomics
@@ -106,11 +106,11 @@ In the interests of time, let's assume we're happy with the alignments as-is, an
 
 ## A concatenated analysis
 
-Now we'll use IQ-TREE to estimate a tree all 29 of our alignments at once.
+Now we'll use IQ-TREE to estimate a tree using all 29 of our alignments at once.
 
 To do this, we can run IQ-TREE on the folder of 29 alignments as follows. Get this running, and then read more about what is happening while it runs:
 
-> Note: on Windows you only need to run the second line. The first line deals with a problem specific to Macs, because Macs add annoying hidden files!
+> Note: The first line deals with a problem specific to Macs, because Macs add annoying hidden files!
 
 ```{bash, eval=FALSE}
 rm 29_loci/.DS_store
@@ -120,8 +120,8 @@ iqtree -s 29_loci -bb 1000
 Breaking down the IQ-TREE command:
 
 -   `-s` tells IQ-TREE that you have a folder of alignments, and that you want IQ-TREE to concatenate all of them together into one long alignment, then treat them as one long locus (i.e. fit a single model to all the sites together).
-    -   This is the same command we used when we had a single alignment
--   `-bb 1000` tells IQ-TREE to do 1000 ultrafast bootstraps. We use ultrafast bootstraps here becuase they give us the same infomration, but a lot more quickly!
+    -   This is the same command we used when we had a single alignment.
+-   `-bb 1000` tells IQ-TREE to do 1000 ultrafast bootstraps. We use ultrafast bootstraps here because they give us the same infomration, but a lot more quickly!
     -   Compare this to `-b` which we use to do the original bootstraps.
 
 ### Examining the .iqtree file
@@ -129,15 +129,15 @@ Breaking down the IQ-TREE command:
 Examine the `29_loci.iqtree` file. Note that the best-fit model of evolution here is one of the most complex models we have for DNA sequences: `GTR+F+I+G4`. Breaking this down:
 
 -   `GTR`: is the general time reversible model, in which we have independent rates of change between each pair of the four bases, A, C, T, and G.
--   `+F`: means we are estimating the base frequencies from the alignment
--   `+I`: means we are estimating an invariant sites parameter (roughly - this allows constant sites to be modelled as not changing over evolutionary time)
--   `+G4`: means we are estimating a gamma distributed rates with four categories (this allows some sites to evolve slowly, and some more quickly).
+-   `+F`: means we are estimating the base frequencies from the alignment.
+-   `+I`: means we are estimating an invariant sites parameter (roughly --- this allows constant sites to be modelled as not changing over evolutionary time).
+-   `+G4`: means we are estimating a gamma distributed rate variation with four categories (this allows some sites to evolve slowly, and some more quickly).
 
-The actual parameters for each of these parts of the model are described in the `SUBSTITUTION PROCESS` section. It's worth familiarising yourself with this, because extreme parameter values can sometimes highlight issues with your data. (Here there aren't any extreme values).
+The actual parameters for each of these parts of the model are described in the `SUBSTITUTION PROCESS` section. It's worth familiarising yourself with this, because extreme parameter values can sometimes highlight issues with your data. (Here there aren't any extreme values.)
 
 ### Examining tree file
 
-Load the tree file (`29_loci.treefile`) FigTree. Root it with the Lungfish, order the nodes, and then add the bootstraps to the branches. Your tree should look like this:
+Load the tree file (`29_loci.treefile`) in FigTree. Root it with the Lungfish, order the nodes, and then add the bootstraps to the branches. Your tree should look like this:
 
 ![](images/clipboard-2453112581.png)
 
@@ -161,7 +161,7 @@ What is the bootstrap support for this placement?
 
 ## Adding gene concordance factors
 
-Knowing the bootstrap value is useful. It's even more useful if we can also know what proportion of our 29 loci actually supported the answer. This number is called a `gene concordance factor`. To add those to our tree, we'll need to calculate trees for all the 29 loci, then see how many of them support the (crocodile + turtle) grouping.
+Knowing the bootstrap value is useful. It's even more useful if we can also know what proportion of our 29 loci actually supported the answer. This number is called a \`gene concordance factor' (gCF for short). To add those to our tree, we'll need to calculate trees for all the 29 loci, then see how many of them support the (crocodile + turtle) grouping.
 
 To do that, we'll first compute a tree for every one of the 29 loci. The command below runs a full IQ-TREE analysis on each of the 29 loci independently, generating 29 independent trees.
 
@@ -172,7 +172,7 @@ iqtree -S 29_loci --prefix loci
 Let's break that down:
 
 * `-S 29_loci`: tells IQ-TREE to build a separate tree for every alignment in the `29_loci` folder.
-    * Compare this to the small 's' we use to join them all together and get one tree above
+    * Compare this to the small 's' we use to join them all together and get one tree above.
 * `--prefix loci`: adds the prefix `loci` to all of the output files so we can keep track of what we're doing.
 
 Next we need to calculate the gene concordance factors and add them to the tree we calculated above. IQ-TREE will do that for us with this command:
@@ -183,11 +183,11 @@ iqtree -t 29_loci.treefile --gcf loci.treefile --prefix concord
 
 Breaking this down:
 
-* `-t 29_loci.treefile`: tells IQ-TREE we want to add the gCf values to our existing maximum likelihood tree we calculated above
-* `--gcf loci.treefile`: tells IQ-TREE to calculate gCF values from the `loci.treefile`, which contains a tree for each of the 29 individual loci
-* `--prefix concord`: tells IQ-TREE to add the prefix `concord` to the output files
+* `-t 29_loci.treefile`: tells IQ-TREE we want to add the gCF values to our existing maximum likelihood tree we calculated above.
+* `--gcf loci.treefile`: tells IQ-TREE to calculate gCF values from the `loci.treefile`, which contains a tree for each of the 29 individual loci.
+* `--prefix concord`: tells IQ-TREE to add the prefix `concord` to the output files.
 
-Now we can look at those gCF values by opening the `concord.cf.tree` file in FigTree, and going through the usual steps
+Now we can look at those gCF values by opening the `concord.cf.tree` file in FigTree, and going through the usual steps:
 
 * root the tree on the lungfish
 * order the nodes
@@ -226,10 +226,10 @@ iqtree -p 29_loci -m MFP+MERGE -bb 1000 --prefix partitioned
 
 While that runs, here's what those commands do:
 
-* `-p 29_loci`: fits a model in which each partition (which is one or more loci) gets its own rate of evolution
-* `-m MFP+MERGE`: chooses a best-fit model for each partition (`MFP` stands for ModelFinder Plus), and then uses the partitionfinder algorithm to figure out how best to merge together similar partitions (the `MERGE` part).
-* `-bb 1000`: does 1000 ultrafast bootstraps
-* `--prefix partitioned`: prefixes the output files with 'partitioned'
+* `-p 29_loci`: fits a model in which each partition (which is one or more loci) gets its own rate of evolution.
+* `-m MFP+MERGE`: chooses a best-fit model for each partition (`MFP` stands for ModelFinder Plus), and then uses the PartitionFinder algorithm to figure out how best to merge together similar partitions (the `MERGE` part).
+* `-bb 1000`: does 1000 ultrafast bootstraps.
+* `--prefix partitioned`: prefixes the output files with 'partitioned'.
 
 Before we go further, take a look at the `partitioned.iqtree` file. In the `ModelFinder` section you should see something like this (I removed most columns for clarity):
 
@@ -263,7 +263,7 @@ ID  Model           Speed
  8  GTR+F+I+G4     1.1512  
 ```
 
-This tells you that the different partitions are evolving at quite different rates. The fastest partition (number 4)evolves about 1.5x faster than the average, and the slowest (number 5) evolves at about 0.6x the average. That's more than a 2-fold difference. 
+This tells you that the different partitions are evolving at quite different rates. The fastest partition (number 4) evolves about 1.5x faster than the average, and the slowest (number 5) evolves at about 0.6x the average. That's more than a 2-fold difference. 
 
 ### Is the partitioned or concatenated model better?
 
@@ -278,7 +278,7 @@ In my analysis, BIC scores are:
 * partitioned analysis: 232498.1814
 * concatenated analysis: 232864.3277
 
-The score for the partitioned analysis is lower by almost 400 units. This confirms that the partioned model is a better model.
+The score for the partitioned analysis is lower by almost 400 units. This confirms that the partitioned model is a better model for this dataset.
 
 ### Adding gCF values to the partitioned tree
 
@@ -315,7 +315,7 @@ Examine the tree.
 
 **3. Would you reach different conclusions?** Yes! You'd be reasonably sure that turtles are sister to a (crocodile + bird) clade.
 
-**4. What is going on?** The only difference here is the model. The concatenated model gives us turtles as sister to crocs, with 84% bootstrap support and a gCF of 13.8%. The partitioned model gives us turtles as sister to (crocodiles + birds) with 100% bootstrap and 37.9% gCF.
+**4. What is going on?** The only difference here is the model. The concatenated model gives us turtles as sister to crocodiles, with 84% bootstrap support and a gCF of 13.8%. The partitioned model gives us turtles as sister to (crocodiles + birds) with 100% bootstrap and 37.9% gCF.
 
 **5. Which answer should we believe?** The BIC value of the partitioned model is substantially lower, so we should prefer this model, and therefore the answer given by this analysis. 
 </details>
@@ -323,7 +323,7 @@ Examine the tree.
 
 # **Finishing up**
 
-This tutorial demonstrates the basics of using IQ-TREE on phylogenomic datasets. One thing it underlines is that models matter. Choosing a good model can make a huge difference to the answers you get! The argument about the closest relatives of turtles was larglely resolved in favour of the answer we get here: that turtles are sister to crocodiles. Choosing good phylogenetic models was a crucial part of getting this answer.
+This tutorial demonstrates the basics of using IQ-TREE on phylogenomic datasets. One thing it underlines is that models matter. Choosing a good model can make a huge difference to the answers you get! The argument about the closest relatives of turtles was larglely resolved in favour of the answer we get here: that turtles are sister to (crocodiles + birds). Choosing good phylogenetic models was a crucial part of getting this answer.
 
 If you want to keep learning about phylogenomic analyses with IQ-TREE, here are some additional resources.
 
@@ -350,4 +350,4 @@ The whole IQ-TREE team and community can be contacted on the IQ-TREE discussion 
 
 https://github.com/orgs/iqtree/discussions
 
-If you're a beginner, there's a reasonable chance that your question has been asked before, so it's worth searching hte discussions!
+If you're a beginner, there's a reasonable chance that your question has been asked before, so it's worth searching the discussions!
